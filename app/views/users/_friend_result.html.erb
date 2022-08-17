@@ -1,0 +1,18 @@
+<div class="results-block">
+  <%= render 'layouts/popups' %>
+</div>
+<% if @friend %>
+  <div class="card card-header results-block">
+    <strong>Email: </strong><%= @friend %>
+    <strong>Name: </strong><%= @friend %>
+    <strong>Price: </strong><%=  @friend %>
+    <% if @friend %>
+      <%= link_to "Follow", '#',
+                                      class: "btn btn-info", method: :post %>
+    <% else %>
+      <span class="badge badge-secondary">
+        Already following
+      </span>
+    <% end %>
+  </div>
+<% end %>

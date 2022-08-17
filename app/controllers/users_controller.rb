@@ -8,7 +8,19 @@ class UsersController < ApplicationController
   end
 
   def search
-    render json: params[:friend]
+    if params[:friend].present?
+      @friend = params[:friend]
+      if @friend
+        respond_to do |format|
+          format.js { render partial: 'users/friend_result' }
+        end
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "Enter a friend's name or email please !!"
+        format.js { render partial: 'users/friend_result' }
+      end
+    end
   end
 
 end
