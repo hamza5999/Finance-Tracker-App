@@ -8,7 +8,7 @@
     <strong>Price: </strong><%=  @stock.last_price %>
     <% if current_user.can_track_stock?(@stock.ticker) %>
       <%= link_to "Add To Portfolio", user_stocks_path(user: current_user, ticker: @stock.ticker),
-                                      class: "btn btn-info", method: :post %>
+                                      class: "btn btn-sm btn-info", method: :post %>
     <% else %>
       <span class="badge badge-secondary">
         Already tracking

@@ -1,18 +1,33 @@
 <div class="results-block">
   <%= render 'layouts/popups' %>
 </div>
-<% if @friend %>
+<% if @friends %>
   <div class="card card-header results-block">
-    <strong>Email: </strong><%= @friend %>
-    <strong>Name: </strong><%= @friend %>
-    <strong>Price: </strong><%=  @friend %>
-    <% if @friend %>
-      <%= link_to "Follow", '#',
-                                      class: "btn btn-info", method: :post %>
-    <% else %>
-      <span class="badge badge-secondary">
-        Already following
-      </span>
-    <% end %>
+    <table class="col-md-12">
+      <tbody>
+        <% @friends.each do |friend| %>
+          <tr>
+            <td>
+              <strong>Name: </strong>
+              <%= friend.full_name %>
+            </td>
+            <td>
+              <strong>Email: </strong>
+              <%= friend.email %>
+            </td>
+            <td>
+              <%= link_to "View Profile", user_path(friend), class: "btn btn-sm btn-primary" %>
+              <% if current_user.not_friends_with?(friend.id) %>
+                <%= link_to "Follow", friendships_path(friend: friend), class: "btn btn-sm btn-primary", method: :post %>
+              <% else %>
+                <span class="badge badge-secondary">
+                  Friends
+                </span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 <% end %>
